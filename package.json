@@ -3,7 +3,6 @@
 	"version":"0.1.2",
 	"author":"Marc Espín",
 	"description":"Measure the time you spent on coding.",
-	"folder":"TimeFlow",
 	"main":"timeflow.js",
 	"css":["timeflow.css"]
 }

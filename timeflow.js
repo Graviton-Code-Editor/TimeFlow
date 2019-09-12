@@ -14,7 +14,6 @@ let days;
 let count = 0;
 
 timeflow.getData(function(data){
-  console.log(data)
   let times = data["times"]
   times.splice(0,1); //Remove one day to the left
   timeflow.setData("times",times); //Save the data
@@ -51,10 +50,10 @@ timeflow.getData(function(data){
             click:()=>{
               new Dialog({
                 id:"timeflow_info",
-                title:current_config.language['About']+" Timeflow" ,
+                title:getTranslation("About")+" Timeflow" ,
                 content:"TimeFlow collets the time you spent on coding by saving <strong>locally</strong> the data.",
                 buttons:{
-                  [current_config.language['Close']]:{},
+                  [getTranslation("Close")]:{},
                 }
               })
             }
@@ -74,7 +73,6 @@ timeflow.getData(function(data){
         }, false);
       }
       document.getElementById('time_flow_switcher').onclick = function(){
-        console.log(timeflow.getData())
         if(timeflow.getData()["status"]=="desactivated"){
           timeflow.setData("status","activated");
           loop();
@@ -86,20 +84,16 @@ timeflow.getData(function(data){
   }
   renderGraphic();
   async function loop(){
-  const delay = setTimeout(() => {
-    count += 150000;
-    let new_data = timeflow.getData()["times"];
-    new_data[6] = count;
-    timeflow.setData("times",new_data);
-    renderGraphic(); //Updates the dropmenu
-    if(timeflow.getData()["status"] =="activated"){
-      loop();
-    }    
-  },150000) //150000
-}
-loop()
+    const delay = setTimeout(() => {
+      count += 150000;
+      let new_data = timeflow.getData()["times"];
+      new_data[6] = count;
+      timeflow.setData("times",new_data);
+      renderGraphic(); //Updates the dropmenu
+      if(timeflow.getData()["status"] =="activated"){
+        loop();
+      }    
+    },150000) //150000
+  }
+  loop()
 })
-
-
-
-
